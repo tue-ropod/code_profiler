@@ -1,0 +1,19 @@
+<package>
+  <description brief="code_profiler">
+
+     code_profiler
+
+  </description>
+  <author>tim</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/code_profiler</url>
+  <depend package="roscpp"/>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lcodeprofiler"/>
+  </export>
+
+
+</package>
+
+
