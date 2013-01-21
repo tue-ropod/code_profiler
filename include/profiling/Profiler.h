@@ -1,5 +1,6 @@
 #ifndef PROFILER_H
 #define PROFILER_H
+#define PROFILEAPP
 #include <string>
 #include <map>
 #include <vector>
@@ -37,11 +38,12 @@ public:
         currentlyProfiling = "";
         stats = new FunctionStats();
     }
+    virtual ~ThreadProfiler();
 
     static void Start(const std::string &name);
     static void Stop(const std::string& name);
+    static FunctionStatsPtr ReturnCurrentStatistics();
 
-    virtual ~ThreadProfiler();
 
     FunctionStatsPtr stats;
 
@@ -106,6 +108,12 @@ inline void ThreadProfiler::Stop(const std::string &name)
     mapIt->second.running = false;
 }
 
+inline FunctionStatsPtr ThreadProfiler::ReturnCurrentStatistics()
+{
+    ThreadProfiler& instance = manager.Profiler();
+    return instance.stats;
+}
+
 namespace
 {
     template<typename T>
@@ -121,14 +129,14 @@ namespace
     }
 }
 
-ThreadProfiler::~ThreadProfiler(){ }
+inline ThreadProfiler::~ThreadProfiler(){ }
 
-ThreadProfilerManager::ThreadProfilerManager()
+inline ThreadProfilerManager::ThreadProfilerManager()
 {
     timer.start();
 }
 
-ThreadProfilerManager::~ThreadProfilerManager()
+inline ThreadProfilerManager::~ThreadProfilerManager()
 {
     timer.stop();
     ProfileLog::PrintLog(threadStats, timer.getElapsedTimeInMilliSec());

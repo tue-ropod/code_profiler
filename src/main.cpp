@@ -17,6 +17,7 @@ int testProf()
     ThreadProfiler::Stop("Bla");
     t.stop();
     std::cout << "Elapsed: " << t.getElapsedTimeInMilliSec() << std::cout;
+    return 0;
 }
 
 void testProf2()
@@ -29,5 +30,5 @@ void testProf2()
 
 int main(int argc, char** argv)
 {
-    testProf();
+    return testProf();
 }

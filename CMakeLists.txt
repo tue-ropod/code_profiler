@@ -25,7 +25,7 @@ rosbuild_add_boost_directories()
 set(INC_PROFILING include/profiling/Timer.h include/profiling/Profiler.h include/profiling/ProfileLog.h)
 set(SRC_PROFILING src/profiling/Timer.cpp src/profiling/ProfileLog.cpp)
 rosbuild_add_library(codeprofiler ${INC_PROFILING} ${SRC_PROFILING})
-rosbuild_link_boost(codeprofiler thread)
+rosbuild_link_boost(codeprofiler thread )
 set_property( TARGET codeprofiler PROPERTY COMPILE_DEFINITIONS "PROFILEAPP")
 
 rosbuild_add_executable(profiler_test src/main.cpp)
