@@ -12,6 +12,8 @@
 
 #ifdef PROFILEAPP
 
+static std::string LOGGING_LOCATION = "~/profile_logs";
+
 struct Statistics
 {
     Timer timer;
