@@ -1,6 +1,5 @@
 #ifndef PROFILER_H
 #define PROFILER_H
-#define PROFILEAPP
 #include <string>
 #include <map>
 #include <vector>
