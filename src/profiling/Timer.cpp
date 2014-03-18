@@ -96,8 +96,8 @@ double Timer::getElapsedTimeInMicroSec() const
         gettimeofday(&end_count, NULL);
     }
 
-    double startTimeInMicroSec = (start_count_.tv_sec * 1000000.0) + end_count.tv_usec;
-    double endTimeInMicroSec = (end_count_.tv_sec * 1000000.0) + end_count.tv_usec;
+    double startTimeInMicroSec = (start_count_.tv_sec * 1000000.0) + start_count_.tv_usec;
+    double endTimeInMicroSec = (end_count.tv_sec * 1000000.0) + end_count.tv_usec;
 #endif
 
     return endTimeInMicroSec - startTimeInMicroSec;
