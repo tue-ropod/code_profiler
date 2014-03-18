@@ -25,13 +25,11 @@ Timer::Timer()
     startCount.QuadPart = 0;
     endCount.QuadPart = 0;
 #else
-    startCount.tv_sec = startCount.tv_usec = 0;
-    endCount.tv_sec = endCount.tv_usec = 0;
+    start_count_.tv_sec = start_count_.tv_usec = 0;
+    end_count_.tv_sec = end_count_.tv_usec = 0;
 #endif
 
     stopped = 0;
-    startTimeInMicroSec = 0;
-    endTimeInMicroSec = 0;
 }
 
 
@@ -55,7 +53,7 @@ void Timer::start()
 #ifdef WIN32
     QueryPerformanceCounter(&startCount);
 #else
-    gettimeofday(&startCount, NULL);
+    gettimeofday(&start_count_, NULL);
 #endif
 }
 
@@ -72,7 +70,7 @@ void Timer::stop()
 #ifdef WIN32
     QueryPerformanceCounter(&endCount);
 #else
-    gettimeofday(&endCount, NULL);
+    gettimeofday(&end_count_, NULL);
 #endif
 }
 
@@ -82,20 +80,24 @@ void Timer::stop()
 // compute elapsed time in micro-second resolution.
 // other getElapsedTime will call this first, then convert to correspond resolution.
 ///////////////////////////////////////////////////////////////////////////////
-double Timer::getElapsedTimeInMicroSec()
+double Timer::getElapsedTimeInMicroSec() const
 {
 #ifdef WIN32
     if(!stopped)
         QueryPerformanceCounter(&endCount);
 
-    startTimeInMicroSec = startCount.QuadPart * (1000000.0 / frequency.QuadPart);
-    endTimeInMicroSec = endCount.QuadPart * (1000000.0 / frequency.QuadPart);
+    double startTimeInMicroSec = startCount.QuadPart * (1000000.0 / frequency.QuadPart);
+    double endTimeInMicroSec = endCount.QuadPart * (1000000.0 / frequency.QuadPart);
 #else
-    if(!stopped)
-        gettimeofday(&endCount, NULL);
+    timeval end_count;
+    if (stopped) {
+        end_count = end_count_;
+    } else {
+        gettimeofday(&end_count, NULL);
+    }
 
-    startTimeInMicroSec = (startCount.tv_sec * 1000000.0) + startCount.tv_usec;
-    endTimeInMicroSec = (endCount.tv_sec * 1000000.0) + endCount.tv_usec;
+    double startTimeInMicroSec = (start_count_.tv_sec * 1000000.0) + end_count.tv_usec;
+    double endTimeInMicroSec = (end_count_.tv_sec * 1000000.0) + end_count.tv_usec;
 #endif
 
     return endTimeInMicroSec - startTimeInMicroSec;
@@ -106,7 +108,7 @@ double Timer::getElapsedTimeInMicroSec()
 ///////////////////////////////////////////////////////////////////////////////
 // divide elapsedTimeInMicroSec by 1000
 ///////////////////////////////////////////////////////////////////////////////
-double Timer::getElapsedTimeInMilliSec()
+double Timer::getElapsedTimeInMilliSec() const
 {
     return this->getElapsedTimeInMicroSec() * 0.001;
 }
@@ -116,7 +118,7 @@ double Timer::getElapsedTimeInMilliSec()
 ///////////////////////////////////////////////////////////////////////////////
 // divide elapsedTimeInMicroSec by 1000000
 ///////////////////////////////////////////////////////////////////////////////
-double Timer::getElapsedTimeInSec()
+double Timer::getElapsedTimeInSec() const
 {
     return this->getElapsedTimeInMicroSec() * 0.000001;
 }
@@ -126,7 +128,7 @@ double Timer::getElapsedTimeInSec()
 ///////////////////////////////////////////////////////////////////////////////
 // same as getElapsedTimeInSec()
 ///////////////////////////////////////////////////////////////////////////////
-double Timer::getElapsedTime()
+double Timer::getElapsedTime() const
 {
     return this->getElapsedTimeInSec();
 }

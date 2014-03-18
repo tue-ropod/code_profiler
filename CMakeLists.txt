@@ -17,13 +17,14 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 #uncomment if you have defined messages
-#rosbuild_genmsg()
+rosbuild_genmsg()
 #uncomment if you have defined services
 #rosbuild_gensrv()
 
 rosbuild_add_boost_directories()
-set(INC_PROFILING include/profiling/Timer.h include/profiling/Profiler.h include/profiling/ProfileLog.h)
-set(SRC_PROFILING src/profiling/Timer.cpp src/profiling/ProfileLog.cpp)
+set(INC_PROFILING include/profiling/Timer.h include/profiling/Profiler.h include/profiling/ProfileLog.h
+                  include/profiling/StatsPublisher.h)
+set(SRC_PROFILING src/profiling/Timer.cpp src/profiling/ProfileLog.cpp src/profiling/StatsPublisher.cpp)
 rosbuild_add_library(codeprofiler ${INC_PROFILING} ${SRC_PROFILING})
 rosbuild_link_boost(codeprofiler thread system)
 set_property( TARGET codeprofiler PROPERTY COMPILE_DEFINITIONS "PROFILEAPP")
