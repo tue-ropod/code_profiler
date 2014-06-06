@@ -24,6 +24,8 @@
 #include <iostream>
 #include <string>
 
+namespace tue
+{
 
 class Timer
 {
@@ -57,6 +59,8 @@ private:
     timeval end_count_;                           //
 #endif
 };
+
+}
 
 #define TIMER_START Timer t; t.start();
 #define TIMER_STOP(x) (t. printLastElapsedTime(x))

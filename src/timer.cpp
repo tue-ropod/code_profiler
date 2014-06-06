@@ -15,6 +15,9 @@
 #include "tue/profiling/timer.h"
 #include <stdlib.h>
 
+namespace tue
+{
+
 ///////////////////////////////////////////////////////////////////////////////
 // constructor
 ///////////////////////////////////////////////////////////////////////////////
@@ -142,5 +145,7 @@ void Timer::printLastElapsedTime(std::string m)
 void Timer::printLastElapsedTimeMSec(std::string m)
 {
 	std::cout << m << " (msec): " << getElapsedTimeInMilliSec() << std::endl;
+}
+
 }
 

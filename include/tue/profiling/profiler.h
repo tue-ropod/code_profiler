@@ -21,6 +21,8 @@ public:
 
     void setName(const std::string& name) { name_ = name; }
 
+    const std::string& getName() const { return name_; }
+
     void startTimer(const std::string& name);
 
     void stopTimer();
