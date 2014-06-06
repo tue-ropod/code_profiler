@@ -23,11 +23,14 @@ rosbuild_genmsg()
 
 rosbuild_add_boost_directories()
 set(INC_PROFILING include/profiling/Timer.h include/profiling/Profiler.h include/profiling/ProfileLog.h
-                  include/profiling/StatsPublisher.h)
-set(SRC_PROFILING src/profiling/Timer.cpp src/profiling/ProfileLog.cpp src/profiling/StatsPublisher.cpp)
+                  include/profiling/StatsPublisher.h include/tue/profiling/profiler.h include/tue/profiling/timer.h)
+set(SRC_PROFILING src/profiling/ProfileLog.cpp src/profiling/StatsPublisher.cpp src/profiler.cpp src/timer.cpp)
 rosbuild_add_library(codeprofiler ${INC_PROFILING} ${SRC_PROFILING})
 rosbuild_link_boost(codeprofiler thread system)
 set_property( TARGET codeprofiler PROPERTY COMPILE_DEFINITIONS "PROFILEAPP")
 
 rosbuild_add_executable(profiler_test src/main.cpp)
 target_link_libraries(profiler_test codeprofiler)
+
+rosbuild_add_executable(test_profiler test/test_profiler.cpp)
+target_link_libraries(test_profiler codeprofiler)
