@@ -27,7 +27,7 @@ void ProfilePublisher::initialize(const Profiler& profiler)
 {
     profiler_ = &profiler;
     ros::NodeHandle nh("~");
-    pub_stats_ = nh.advertise<std_msgs::String>(profiler_->getName(), 1);
+    pub_stats_ = nh.advertise<std_msgs::String>("profile/" + profiler_->getName(), 1);
 }
 
 // ----------------------------------------------------------------------------------------------------
