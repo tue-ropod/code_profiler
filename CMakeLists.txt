@@ -22,11 +22,27 @@ rosbuild_genmsg()
 #rosbuild_gensrv()
 
 rosbuild_add_boost_directories()
-set(INC_PROFILING include/profiling/Timer.h include/profiling/Profiler.h include/profiling/ProfileLog.h
-                  include/profiling/StatsPublisher.h include/tue/profiling/profiler.h include/tue/profiling/timer.h
-                  include/tue/profiling/ros/profile_publisher.h)
-set(SRC_PROFILING src/profiling/Timer.cpp src/profiling/ProfileLog.cpp src/profiling/StatsPublisher.cpp src/profiler.cpp src/timer.cpp
-    src/ros/profile_publisher.cpp)
+set(INC_PROFILING
+    include/profiling/Timer.h
+    include/profiling/Profiler.h
+    include/profiling/ProfileLog.h
+    include/profiling/StatsPublisher.h
+    include/tue/profiling/profiler.h
+    include/tue/profiling/timer.h
+    include/tue/profiling/scoped_timer.h
+    include/tue/profiling/ros/profile_publisher.h
+)
+
+set(SRC_PROFILING
+    src/profiling/Timer.cpp
+    src/profiling/ProfileLog.cpp
+    src/profiling/StatsPublisher.cpp
+    src/profiler.cpp
+    src/timer.cpp
+    src/scoped_timer.cpp
+    src/ros/profile_publisher.cpp
+)
+
 rosbuild_add_library(codeprofiler ${INC_PROFILING} ${SRC_PROFILING})
 rosbuild_link_boost(codeprofiler thread system)
 set_property( TARGET codeprofiler PROPERTY COMPILE_DEFINITIONS "PROFILEAPP")
