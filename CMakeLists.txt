@@ -76,4 +76,4 @@ target_link_libraries(profiler_test codeprofiler)
 add_executable(test_profiler test/test_profiler.cpp)
 target_link_libraries(test_profiler codeprofiler)
 
-add_dependencies(codeprofiler ${PROJECT_NAME}_gencpp)
+add_dependencies(codeprofiler ${${PROJECT_NAME}_EXPORTED_TARGETS})
