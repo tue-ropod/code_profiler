@@ -41,4 +41,4 @@ target_link_libraries(profiler_test codeprofiler)
 add_executable(test_profiler test/test_profiler.cpp)
 target_link_libraries(test_profiler codeprofiler)
 
-add_dependencies(codeprofiler ${catkin_EXPORTED_TARGETS})
+add_dependencies(codeprofiler ${PROJECT_NAME}_generate_messages_cpp)
