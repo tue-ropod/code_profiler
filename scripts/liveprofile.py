@@ -41,7 +41,7 @@ class LiveProfile:
                 self.agg[l].append(t)
 
     def report(self, data):
-        for k, v in data.iteritems():
+        for k, v in sorted(data.iteritems()):
             mean = "{0:.3f} ms".format(numpy.mean(v, axis=0)*1000)
             std  = "{0:.3f} ms".format(numpy.std(v, axis=0)*1000)
             print k.ljust(55), '\tmean: ', mean, '\tstd:', std, '\t (', len(v), ' samples)'
