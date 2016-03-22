@@ -1,5 +1,4 @@
 #include <tue/profiling/loop_timer.h>
-#include <vector>
 
 class LoopTimerTest
 {
