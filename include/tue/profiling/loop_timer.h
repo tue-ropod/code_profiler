@@ -15,6 +15,7 @@ class LoopTimer
     long unsigned int counts_;      // Loop counter
     long double sum_;               // Sum so far
     long double c_;                 // Compensation for lost low-order bits
+    bool running_;                  // Indicates that timer is running
 
 public:
     LoopTimer();
