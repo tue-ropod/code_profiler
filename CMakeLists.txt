@@ -28,6 +28,7 @@ set(SRC_PROFILING
     src/profiler.cpp
     src/timer.cpp
     src/scoped_timer.cpp
+    src/loop_timer.cpp
     src/ros/profile_publisher.cpp
 )
 
