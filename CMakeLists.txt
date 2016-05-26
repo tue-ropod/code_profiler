@@ -28,6 +28,7 @@ set(SRC_PROFILING
     src/profiler.cpp
     src/timer.cpp
     src/scoped_timer.cpp
+    src/loop_timer.cpp
     src/ros/profile_publisher.cpp
 )
 
@@ -40,5 +41,8 @@ target_link_libraries(profiler_test codeprofiler)
 
 add_executable(test_profiler test/test_profiler.cpp)
 target_link_libraries(test_profiler codeprofiler)
+
+add_executable(test_loop_timer test/test_loop_timer.cpp)
+target_link_libraries(test_loop_timer codeprofiler)
 
 add_dependencies(codeprofiler ${PROJECT_NAME}_generate_messages_cpp)
