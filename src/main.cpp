@@ -16,7 +16,9 @@ int testProf()
     ThreadProfiler::Start("Bla");
     ThreadProfiler::Stop("Bla");
     t.stop();
-    std::cout << "Elapsed: " << t.getElapsedTimeInMilliSec() << std::cout;
+    double tElapsed = t.getElapsedTimeInMilliSec() ;
+    //std::cout << "Elapsed: " << tElapsed << std::cout;
+    printf("Elapsed: %f\n", tElapsed);
     return 0;
 }
 
